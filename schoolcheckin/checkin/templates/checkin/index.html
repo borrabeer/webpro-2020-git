@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block content %}
+    <h1>Welcome to Class Attendace System</h1>
+    <table class="table">
+        <thead>
+            <tr>
+            <th scope="col">Time</th>
+            <th scope="col">Subject</th>
+            <th scope="col">Section</th>
+            <th scope="col">Room</th>
+            <th scope="col">Student amount</th>
+            <th scope="col">Detail</th>
+            <th scope="col">Check in</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in classes %}
+                <tr>
+                <td>{{ item.weekday }} @ {{ item.time }}</td>
+                {% for course in courses %}
+                    {% if course.id == item.course_id %}
+                        <td>{{ course.name }} ({{ course.code }})</td>
+                    {% endif %}
+                {% endfor %}
+                <td>{{ item.section }}</td>
+                <td>{{ item.room}}</td>
+                <td>{{ item.student_amount}}</td>
+                <td><a href='{{ item.id }}' class="btn btn-warning">Detail</td>
+                <td><a href="check/{{ item.id }}" class="btn btn-primary">Check in</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    
+{% endblock %}

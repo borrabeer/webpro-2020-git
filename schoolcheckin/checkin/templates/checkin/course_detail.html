@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block content %}
+    {% for c in classes %}
+        {% if id == c.id %}
+            {% for item in courses %}
+                {% if c.course_id == item.id %}
+                    <h1>Course Name : {{ item.name }} ({{ item.code }})</h1>
+                    <b>Course Description </b> : {{ item.description }} <br>
+                    {% for class in classes %}
+                        {% if id == class.id %}
+                            <b>Section</b> : {{ class.id }} <br>
+                            <b>Time</b> : {{ class.time }} <br>
+                            <b>Room</b> : {{ class.room }} <br>
+                            <b>Current Date/Time</b> : {% now "DATE_FORMAT" %} <br>
+                            <a href="check/{{ item.id }}" class="btn btn-primary">Check in</a> <br>
+                            <hr>
+                            <button type="button" class="btn btn-warning">
+                                Total Students : <span class="badge badge-light">{{ class.student_amount }}</span>
+                            </button>
+                            {% for attend in attendance %}
+                                {% if class.id == attend.class_id %}
+                                    <button type="button" class="btn btn-success">
+                                        Attend : <span class="badge badge-light">{{ attend.attend }}</span>
+                                    </button>
+                                    <button type="button" class="btn btn-danger">
+                                        Attend : <span class="badge badge-light">{{ attend.absent }}</span>
+                                    </button>
+                                {% endif %}
+                            {% endfor %}
+                        {% endif %}
+                    {% endfor %}
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+    {% endfor %}
+{% endblock %}

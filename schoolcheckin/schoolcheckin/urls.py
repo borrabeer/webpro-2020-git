@@ -21,9 +21,9 @@ from report import views as views_report
 from myadmin import views as views_myadmin
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('checkin/course/<int:teacher_id>/', views_checkin.show_course),
-    path('checkin/course/<int:teacher_id>/<int:course_id>/', views_checkin.show_course_detail),
-    path('checkin/<int:course_id>/', views_checkin.checking_course),
+    path('checkin/course/', views_checkin.show_course),
+    path('checkin/course/<int:course_id>/', views_checkin.show_course_detail),
+    path('checkin/course/check/<int:course_id>/', views_checkin.checking_course),
     path('report/course/<int:course_id>/', views_report.report_course),
     path('myadmin/<int:teacher_id>/', views_myadmin.manage_page)
 ]
